@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="manifest" href="/manifest.json">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="/icon.png">
+  <!-- Enable standalone full-screen mode on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Set the app title when added to home screen -->
+  <meta name="apple-mobile-web-app-title" content="MyAppName">
+  <!-- Set status bar color -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+</head>
+<body>
+  <div class="main-container">
+    <div class="sidebar" id="sidebar">
+      <button class="menu-toggle-btn" id="toggleSidebarBtn">☰</button>
+      <ul class="menu-content">
+        <li><a href="index.html" class="nav-btn" data-page="home"><span class="icon-container"><span class="material-symbols-outlined">home</span></span><span class="label">Home</span></a></li>
+        <li><a href="dashboard.html" class="nav-btn active" data-page="dashboard"><span class="icon-container"><span class="material-symbols-outlined">dashboard</span></span><span class="label">Dashboard</span></a></li>
+        <li><a href="explore.html" class="nav-btn" data-page="explore"><span class="icon-container"><span class="material-symbols-outlined">explore</span></span><span class="label">Explore</span></a></li>
+        <li><a href="analytics.html" class="nav-btn" data-page="analytics"><span class="icon-container"><span class="material-symbols-outlined">analytics</span></span><span class="label">Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-btn" data-page="settings"><span class="icon-container"><span class="material-symbols-outlined">settings</span></span><span class="label">Settings</span></a></li>
+        <li><a href="account.html" class="nav-btn" data-page="account"><span class="icon-container"><span class="material-symbols-outlined">person</span></span><span class="label">Account</span></a></li>
+        <li><a href="report.html" class="nav-btn" data-page="report"><span class="icon-container"><span class="material-symbols-outlined">report</span></span><span class="label">Report</span></a></li>
+        <li><a href="contact.html" class="nav-btn" data-page="contact"><span class="icon-container"><span class="material-symbols-outlined">mail</span></span><span class="label">Contact</span></a></li>
+        <li><a href="download.html" class="nav-btn"><span class="icon-container"><span class="material-symbols-outlined">download</span></span><span class="label">Download</span></a></li>
+      </ul>
+    </div>
+
+ <div class="content"  id="dashboardPage">
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+    
+      <section class="account-list">
+        <div id="total-balance">
+          <div>Total Balance</div>
+          <span id="homeBalanceAmount">$0.00</span>
+        </div>
+      </section>
+
+    <div class="card">
+        <h3 style="font-size: 25px;">Add Transaction</h3>
+
+        <style>
+          h1 {
+            font-size: 36px;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            margin-top: 20px;
+            font-weight: bold;
+          }
+
+          /* Total Balance styling */
+          #total-balance {
+            font-size: 30px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-align: center;
+            background-color: var(--circle-bg);
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+          }
+        
+          #balance-amount {
+            display: block;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 5px;
+            color: var(--text-color);
+          }
+        
+          #total-balance:hover {
+            background-color: var(--hover-bg);
+          }
+        
+
+          .card {
+            background-color: var(--circle-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+          }
+
+          .card:hover {
+            transform: translateY(-5px);
+          }
+
+          .card h2, .card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+          }
+
+          
+          .account-list {
+            display: flex;
+            justify-content: center; /* centers horizontally */
+          
+          }
+
+
+          .card .btn {
+            background-color: var(--sidebar-bg);
+            color:var(--button-hover-bg);
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 22px;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+          }
+
+          .card .btn:hover {
+            background-color: var(--sidebar-bg);
+            font-weight: bold;
+          }
+
+          /* Add Transaction Section */
+          #desc, #amount, #category, #type, #account , #date{
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            color: var(--primary-color)
+          }
+
+          #desc, #amount, #category, #type, #account, #date {
+            background-color: var(--sidebar-bg);
+          }
+
+          #desc:focus, #amount:focus, #category:focus, #type:focus, #account:focus {
+            outline-color: var(--primary-color);
+          }
+
+          /* Transaction History Section */
+          .history-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+          }
+
+          .history-list li {
+            padding: 10px;
+            background-color:var(--sidebar-bg);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+          }
+
+          .history-list li span {
+            font-weight: bold;
+          }
+
+          .history-list li .delete-btn {
+            background-color: var(--danger-bg);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+          }
+
+          .history-list li .delete-btn:hover {
+            background-color: var(--danger-hover-bg);
+          }
+
+          /* Income / Expense Color Styles */
+          .history-list li.income {
+            border-color: #4caf50;
+          }
+
+          .history-list li.expense {
+            border-color: #f44336;
+          }
+
+          .history-list li.transfer {
+            border-color: #ffa726;
+          }
+
+          #transfer-fields {
+            display: none; /* Hidden by default */
+            font-weight: bold;
+            justify-content: center; /* Centers the content horizontally */
+            align-items: center; /* Vertically aligns items */
+          }
+
+          #transfer-fields select {
+            padding: 4px 4px; /* Smaller padding for a more compact field */
+            font-size: 14px; /* Smaller font size for the select field */
+            background-color: var(--sidebar-bg);
+            margin-bottom: 10px; /* Reduced margin to decrease the gap */
+            border: 1px solid #ddd;
+            border-radius: 4px; /* Rounded corners */
+          }
+
+          #transfer-fields span {
+            font-size: 16px; /* Decreased arrow size */
+            color: #333; /* Dark color for visibility */
+            font-weight: bold;
+          }
+
+
+        </style>
+
+        <!-- Row 1: Description + Amount -->
+        <div style="display: flex; align-items: center; gap: 10px; ">
+          <input type="text" id="desc" placeholder="Description" style="flex: 1; padding: 8px;">
+          <input type="number" id="amount" placeholder="Amount" style="flex: 1; padding: 8px;">
+        </div>
+
+        <!-- Row 2: Category + Type -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <select id="category" style="flex: 1; padding: 8px;">    <!-- Category Dropdown -->
+            <option value="">Select Category</option>
+            <option value="custom">Add Category</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Health">Health</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Groceries">Groceries</option>
+            <option value="Rent">Rent</option>
+            <option value="Salary">Salary</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Education">Education</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Gifts">Gifts</option>
+            <option value="Subscriptions">Subscriptions</option>
+            <option value="Investments">Investments</option>
+            <option value="Travel">Travel</option>
+            <option value="Savings">Savings</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Internet">Internet</option>
+            <option value="Phone">Phone</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Childcare">Childcare</option>
+            <option value="Pets">Pets</option>
+            <option value="Loans">Loans</option>
+            <option value="Taxes">Taxes</option>
+            
+          </select>
+
+          <!-- Custom Category Input -->
+          <input 
+            type="text" 
+            id="customCategoryInput" 
+            placeholder="Enter custom category" 
+            style="display: none; padding: 8px; width: 40%;" 
+            autocomplete="off"
+          />
+
+          <!-- Custom Category Logic -->
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const categorySelect = document.getElementById('category');
+              const customInput = document.getElementById('customCategoryInput');
+          
+              // Load saved custom categories
+              const savedCategories = JSON.parse(localStorage.getItem('customCategories')) || [];
+              savedCategories.forEach(cat => {
+                addCustomOption(cat);
+              });
+          
+              categorySelect.addEventListener('change', function () {
+                if (this.value === 'custom') {
+                  customInput.style.display = 'block';
+                  customInput.focus();
+                } else {
+                  customInput.style.display = 'none';
+                }
+              });
+          
+              function addCustomOption(value) {
+                const newOption = document.createElement('option');
+                newOption.value = value;
+                newOption.textContent = value;
+                categorySelect.insertBefore(newOption, categorySelect.lastElementChild);
+              }
+          
+              function handleCustomInput() {
+                const customValue = customInput.value.trim();
+                if (customValue) {
+                  const exists = Array.from(categorySelect.options).some(opt => opt.value === customValue);
+                  if (!exists) {
+                    addCustomOption(customValue);
+          
+                    // Save to localStorage
+                    savedCategories.push(customValue);
+                    localStorage.setItem('customCategories', JSON.stringify(savedCategories));
+                  }
+          
+                  categorySelect.value = customValue;
+                }
+          
+                customInput.value = '';
+                customInput.style.display = 'none';
+              }
+          
+              customInput.addEventListener('blur', handleCustomInput);
+              customInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleCustomInput();
+                }
+              });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+            const accountSelect = document.getElementById('account');
+            
+            // Load accounts from localStorage
+            const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+
+            // Function to populate the account dropdown
+            function populateAccountDropdown() {
+              accountSelect.innerHTML = ''; // Clear existing options
+
+              // Add a default "Select Account" option
+              const defaultOption = document.createElement('option');
+              defaultOption.value = '';
+              defaultOption.textContent = 'Select Account';
+              accountSelect.appendChild(defaultOption);
+
+              // Add each account as an option
+              accounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.name; // Set account name as value
+                option.textContent = `${account.name} - $${account.balance.toFixed(2)}`; // Display account name and balance
+                accountSelect.appendChild(option);
+              });
+            }
+
+            // Call the function to populate the account dropdown
+            populateAccountDropdown();
+          });
+          
+
+          </script>
+
+          <select id="account" style="flex: 1; padding: 8px;">
+            <!-- Options will be added dynamically -->
+          </select>
+        </div>
+        
+        <!-- Row 3: Date + Type -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 0;">
+            <input type="date" id="date" style="flex: 1;">
+            <select id="type" style="flex: 1;">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+                <option value="transfer">Transfer</option>
+            </select>
+        </div>
+        
+
+        </select>
+        <div id="transfer-fields" style="display: none; margin-top: 10px;">
+            <select id="fromAccount">
+              <!-- Populated dynamically -->
+            </select>
+          
+            <span style="margin: 0 10px;">→</span>
+          
+            <select id="toAccount">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          
+        <button class="btn" onclick="addTransaction()">Add Transaction</button>
+      </div>
+      
+      
+      <div class="card">
+        <h3 style="font-size: 25px;">Transaction History</h3>
+
+        <ul id="historyList" class="history-list"></ul>
+      </div>
+<!------------------- script ------------------------------------------------------------------->
+    <script>
+      function showHomeTotalBalance() {
+            try {
+                // Fetch accounts from localStorage
+                const storedAccounts = localStorage.getItem('accounts');
+                const accounts = storedAccounts ? JSON.parse(storedAccounts) : [];
+
+                // Calculate total balance
+                const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
+
+                // Display total balance
+                const homeBalanceAmount = document.getElementById('homeBalanceAmount');
+                if (homeBalanceAmount) {
+                    if (accounts.length === 0) {
+                        homeBalanceAmount.textContent = "$0.00"; // Show default balance if no accounts
+                    } else {
+                        homeBalanceAmount.textContent = `$${totalBalance.toFixed(2)}`;
+                    }
+                }
+            } catch (error) {
+                console.error("Error loading total balance:", error);
+
+                // Optionally display an error message in the UI for user feedback
+                const homeBalanceAmount = document.getElementById('homeBalanceAmount');
+                if (homeBalanceAmount) {
+                    homeBalanceAmount.textContent = "Error loading balance";
+                }
+            }
+        }
+
+        // Call this function when the home page loads
+        showHomeTotalBalance();
+
+        // Load accounts and transactions from localStorage
+        let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        let balance = 0;
+        let editId = null;
+
+        // DOM Elements
+        const historyList = document.getElementById('historyList');
+        const typeSelect = document.getElementById('type');
+        const transferFields = document.getElementById('transfer-fields');
+        const accountSelect = document.getElementById('account');
+        const fromAccountSelect = document.getElementById('fromAccount');
+        const toAccountSelect = document.getElementById('toAccount');
+        const categorySelect = document.getElementById('category');
+        const addTransactionBtn = document.getElementById('addTransactionBtn');
+
+        // On Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+
+            displayAccountOptions();
+            updateTotalBalance();
+            renderTransactions();
+        });
+
+        // Show/hide transfer fields
+        typeSelect.addEventListener('change', () => {
+            transferFields.style.display = typeSelect.value === 'transfer' ? 'flex' : 'none';
+        });
+
+        // Add or Update Transaction
+        function addTransaction() {
+            const desc = document.getElementById('desc').value.trim();
+            const amount = parseFloat(document.getElementById('amount').value);
+            const type = document.getElementById('type').value;
+            const category = document.getElementById('category').value;
+            const date = document.getElementById('date').value;
+
+            if (isNaN(amount) || amount <= 0 || !date) {
+                alert("Please enter a valid amount and date.");
+                return;
+            }
+
+            if (editId !== null) {
+                const index = transactions.findIndex(t => t.id === editId);
+                if (index !== -1) {
+                    deleteTransaction(index);
+                }
+            }
+
+            const formattedDate = new Date(date).toLocaleDateString();
+
+            let transaction;
+
+            if (type === 'transfer') {
+                if (!desc) {
+                    alert("Please enter a description for the transfer.");
+                    return;
+                }
+
+                const from = fromAccountSelect.value;
+                const to = toAccountSelect.value;
+
+                if (from === to) {
+                    alert('Cannot transfer to the same account.');
+                    return;
+                }
+
+                const fromIdx = accounts.findIndex(acc => acc.name === from);
+                const toIdx = accounts.findIndex(acc => acc.name === to);
+                if (fromIdx === -1 || toIdx === -1) return;
+
+                accounts[fromIdx].balance -= amount;
+                accounts[toIdx].balance += amount;
+
+                transaction = { id: Date.now(), desc, amount, type, date, from, to, category };
+            } else {
+                if (!desc || !accountSelect.value) {
+                    alert("Please enter description and select account.");
+                    return;
+                }
+
+                const selectedAccount = accountSelect.value;
+
+                const accIdx = accounts.findIndex(acc => acc.name === selectedAccount);
+                if (accIdx !== -1) {
+                    accounts[accIdx].balance += (type === 'income' ? amount : -amount);
+                }
+
+                transaction = { id: Date.now(), desc, amount, type, date, account: selectedAccount, category };
+            }
+
+            transactions.push(transaction);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+
+            updateTotalBalance();
+            showHomeTotalBalance();
+            displayAccountOptions();
+            renderTransactions();
+            resetForm();
+        }
+
+        function displayAccountOptions() {
+            accountSelect.innerHTML = '';
+            fromAccountSelect.innerHTML = '';
+            toAccountSelect.innerHTML = '';
+
+            if (accounts.length === 0) {
+                const option = document.createElement('option');
+                option.textContent = 'No accounts available';
+                option.disabled = true;
+                option.selected = true;
+                accountSelect.appendChild(option);
+                return;
+            }
+
+            accounts.forEach(account => {
+                const option = document.createElement('option');
+                option.value = account.name;
+                option.textContent = `${account.name} - $${account.balance.toFixed(2)}`;
+                accountSelect.appendChild(option);
+
+                const fromOption = option.cloneNode(true);
+                const toOption = option.cloneNode(true);
+                fromAccountSelect.appendChild(fromOption);
+                toAccountSelect.appendChild(toOption);
+            });
+        }
+
+        function updateTotalBalance() {
+            const balanceElement = document.querySelector('.card h2 + p');
+            if (!balanceElement) return;
+
+            const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
+            balance = totalBalance;
+            balanceElement.textContent = `$${totalBalance.toFixed(2)}`;
+            balanceElement.style.color = totalBalance < 0 ? 'red' : '#4caf50';
+        }
+
+        
+        function renderTransactions() {
+            // Clear existing transactions
+            historyList.innerHTML = '';
+
+            // Sort transactions by date in descending order
+            const sortedTransactions = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            sortedTransactions.forEach(t => {
+                // Format the date
+                const formattedDate = new Date(t.date).toLocaleDateString();
+
+                // Create a new list item
+                const li = document.createElement('li');
+                li.classList.add('transaction-item', t.type);  // Add type class (income, expense, transfer)
+
+                // LEFT COLUMN (Description, Category, Account)
+                const leftCol = document.createElement('div');
+                leftCol.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                `;
+
+                const descEl = document.createElement('span');
+                descEl.textContent = t.desc;
+                descEl.style.cssText = 'font-weight: 600; font-size: 16px; margin-bottom: 4px;';
+
+                const categoryEl = document.createElement('span');
+                categoryEl.innerHTML = `<strong>Category:</strong> ${t.category}`;
+                categoryEl.style.cssText = 'font-size: 14px; margin-bottom: 4px;';
+
+                const accountEl = document.createElement('span');
+                if (t.type === 'transfer') {
+                    accountEl.innerHTML = `<strong>From:</strong> ${t.from} → <strong>To:</strong> ${t.to}`;
+                } else {
+                    accountEl.innerHTML = `<strong>Account:</strong> ${t.account}`;
+                }
+                accountEl.style.cssText = 'font-size: 14px;';
+
+                leftCol.appendChild(descEl);
+                leftCol.appendChild(categoryEl);
+                leftCol.appendChild(accountEl);
+
+                // RIGHT COLUMN (Date, Amount, Edit/Delete buttons)
+                const rightCol = document.createElement('div');
+                rightCol.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: 6px;
+                `;
+
+                const dateEl = document.createElement('span');
+                dateEl.textContent = formattedDate;
+                dateEl.style.cssText = 'color: #666; font-size: 13px;';
+
+                const amountEl = document.createElement('span');
+                const sign = t.type === 'expense' ? '-' : (t.type === 'income' ? '+' : '-');
+                const color = t.type === 'expense' ? '#f44336' : (t.type === 'income' ? '#4caf50' : '#ffa726');
+                amountEl.textContent = `${sign}$${t.amount.toFixed(2)}`;
+                amountEl.style.cssText = `font-weight: bold; font-size: 15px; color: ${color};`;
+
+                const buttonsWrapper = document.createElement('div');
+                buttonsWrapper.style.cssText = 'display: flex; gap: 6px;';
+
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.onclick = () => editTransaction(t.id);
+                editButton.style.cssText = `
+                    padding: 4px 10px;
+                    background-color: #2196f3;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 13px;
+                `;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteTransactionById(t.id);
+                deleteButton.style.cssText = `
+                    padding: 4px 10px;
+                    background-color: #f44336;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 13px;
+                `;
+
+                buttonsWrapper.appendChild(editButton);
+                buttonsWrapper.appendChild(deleteButton);
+
+                rightCol.appendChild(dateEl);
+                rightCol.appendChild(amountEl);
+                rightCol.appendChild(buttonsWrapper);
+
+                // Append columns to the list item
+                li.appendChild(leftCol);
+                li.appendChild(rightCol);
+
+                // Append list item to the history list
+                historyList.appendChild(li);
+            });
+        }
+
+
+
+        function editTransaction(id) {
+            const t = transactions.find(tr => tr.id === id);
+            if (!t) return;
+
+            document.getElementById('desc').value = t.desc;
+            document.getElementById('amount').value = t.amount;
+            document.getElementById('type').value = t.type;
+            document.getElementById('date').value = new Date(t.date).toISOString().split('T')[0];
+            document.getElementById('category').value = t.category || '';
+
+            if (t.type === 'transfer') {
+                typeSelect.dispatchEvent(new Event('change'));
+                fromAccountSelect.value = t.from;
+                toAccountSelect.value = t.to;
+            } else {
+                accountSelect.value = t.account;
+            }
+
+            editId = t.id;
+            addTransactionBtn.textContent = 'Update Transaction';
+
+            const form = document.getElementById('transaction-form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function deleteTransactionById(id) {
+            const index = transactions.findIndex(t => t.id === id);
+            if (index !== -1) {
+                deleteTransaction(index);
+            }
+        }
+
+        function deleteTransaction(index) {
+            const t = transactions[index];
+
+            if (t.type === 'income' || t.type === 'expense') {
+                const accIdx = accounts.findIndex(acc => acc.name === t.account);
+                if (accIdx !== -1) {
+                    accounts[accIdx].balance -= (t.type === 'income' ? t.amount : -t.amount);
+                }
+            } else if (t.type === 'transfer') {
+                const fromIdx = accounts.findIndex(acc => acc.name === t.from);
+                const toIdx = accounts.findIndex(acc => acc.name === t.to);
+                if (fromIdx !== -1) accounts[fromIdx].balance += t.amount;
+                if (toIdx !== -1) accounts[toIdx].balance -= t.amount;
+            }
+
+            transactions.splice(index, 1);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+
+            updateTotalBalance();
+            showHomeTotalBalance();
+            displayAccountOptions();
+            renderTransactions();
+        }
+
+        function resetForm() {
+            document.getElementById('desc').value = '';
+            document.getElementById('amount').value = '';
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('type').selectedIndex = 0;
+            document.getElementById('category').selectedIndex = 0;
+            transferFields.style.display = 'none';
+            editId = null;
+            addTransactionBtn.textContent = 'Add Transaction';
+        }
+   
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+       
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+U
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === 'F12' || // F12 key
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || // Ctrl+Shift+I or Ctrl+Shift+J
+                (e.ctrlKey && e.key === 'U') // Ctrl+U
+            ) {
+                e.preventDefault();
+                alert("Developer tools detected! Closing the page.");
+                redirectToBlank();
+            }
+        });
+
+        // Function to redirect to blank page and prevent going back
+        function redirectToBlank() {
+            window.location.replace("about:blank"); // Replace current history entry
+        }
+
+        (function detectDevTools() {
+            let devtoolsOpen = false;
+
+            // Detect using window.outerWidth and window.outerHeight
+            function checkWindowSize() {
+                const threshold = 160; // Height difference when DevTools are open
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    devtoolsOpen = true;
+                }
+            }
+
+            // Detect using console.log behavior
+            function checkConsoleBehavior() {
+                const element = new Image();
+                Object.defineProperty(element, 'id', {
+                    get: function () {
+                        devtoolsOpen = true;
+                        // Trigger action immediately
+                        alert("Developer tools detected! Closing the page.");
+                        redirectToBlank();
+                    }
+                });
+                console.log(element);
+            }
+
+            // Monitor for Developer Tools
+            function monitorDevTools() {
+                devtoolsOpen = false;
+                checkWindowSize();
+
+                if (devtoolsOpen) {
+                    alert("Developer tools detected! Closing the page.");
+                    redirectToBlank(); // Redirect to blank page
+                } else {
+                    checkConsoleBehavior();
+                }
+            }
+
+            // Run detection every 100ms for faster response
+            setInterval(monitorDevTools, 100);
+        })();
+ 
+
+    </script>
+
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>

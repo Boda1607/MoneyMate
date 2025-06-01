@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="manifest" href="/manifest.json">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="/icon.png">
+  <!-- Enable standalone full-screen mode on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Set the app title when added to home screen -->
+  <meta name="apple-mobile-web-app-title" content="MyAppName">
+  <!-- Set status bar color -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+</head>
+<body>
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <button class="menu-toggle-btn" id="toggleSidebarBtn">☰</button>
+      <ul class="menu-content">
+        <li><a href="index.html" class="nav-btn" data-page="home"><span class="icon-container"><span class="material-symbols-outlined">home</span></span><span class="label">Home</span></a></li>
+        <li><a href="dashboard.html" class="nav-btn" data-page="dashboard"><span class="icon-container"><span class="material-symbols-outlined">dashboard</span></span><span class="label">Dashboard</span></a></li>
+        <li><a href="explore.html" class="nav-btn" data-page="explore"><span class="icon-container"><span class="material-symbols-outlined">explore</span></span><span class="label">Explore</span></a></li>
+        <li><a href="analytics.html" class="nav-btn active" data-page="analytics"><span class="icon-container"><span class="material-symbols-outlined">analytics</span></span><span class="label">Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-btn" data-page="settings"><span class="icon-container"><span class="material-symbols-outlined">settings</span></span><span class="label">Settings</span></a></li>
+        <li><a href="account.html" class="nav-btn" data-page="account"><span class="icon-container"><span class="material-symbols-outlined">person</span></span><span class="label">Account</span></a></li>
+        <li><a href="report.html" class="nav-btn" data-page="report"><span class="icon-container"><span class="material-symbols-outlined">report</span></span><span class="label">Report</span></a></li>
+        <li><a href="contact.html" class="nav-btn" data-page="contact"><span class="icon-container"><span class="material-symbols-outlined">mail</span></span><span class="label">Contact</span></a></li>
+        <li><a href="download.html" class="nav-btn"><span class="icon-container"><span class="material-symbols-outlined">download</span></span><span class="label">Download</span></a></li>
+      </ul>
+    </div>
+    
+    <div class="content" id="contactPage">
+        <header>
+        <h1 class="page-title">Contact</h1>
+      </header>
+      
+    
+      <!-- Service Card for the Contact Form -->
+      <div class="service-card">
+        <h2><i class="fas fa-envelope"></i> Direct Email</h2>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="5e69601a-c30b-4059-bf9c-c9cba95f97ec">
+    
+          <div class="form-group">
+            <label for="name" data-translate="fullNameLabel">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <label for="email" data-translate="emailLabel">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone" data-translate="phoneLabel">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+          </div>
+          <div class="form-group">
+            <label for="subject" data-translate="subjectLabel">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+          </div>
+          <div class="form-group">
+            <label for="message" data-translate="messageLabel">Your Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn" data-translate="submitBtn">Send Message</button>
+        </form>
+      </div>
+    
+      <style>
+
+          .page-title {
+          text-align: center;
+          font-size: 36px;
+          margin-bottom: 30px;
+          margin-top: 20px; /* Added space above the title */
+          font-weight: bold;
+          color: var(--primary-color);
+        }
+
+          .account-list {
+          display: flex;
+          justify-content: center; /* centers horizontally */
+        
+        }
+        #contactPage {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+    
+        #contactPage .service-card {
+          background: var(--sidebar-bg);
+          padding: 25px;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          transition: background 0.3s ease, color 0.3s ease;
+        }
+    
+        #contactPage h2 {
+          font-size: 1.5rem;
+          margin-bottom: 20px;
+          color: var(--text-color);
+        }
+    
+        #contactPage .form-group {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 15px;
+        }
+    
+        #contactPage label {
+          font-weight: bold;
+          margin-bottom: 6px;
+          color: var(--text-color);
+        }
+    
+        #contactPage input,
+        #contactPage textarea {
+          background-color: var(--bg-color);
+          color: var(--text-color);
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid var(--circle-bg);
+          border-radius: 8px;
+          transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+    
+        #contactPage input:focus,
+        #contactPage textarea:focus {
+          border-color: var(--switch-active-bg);
+          outline: none;
+        }
+    
+        #contactPage .btn {
+          background-color: var(--switch-active-bg);
+          color: var(--bg-color);
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+    
+        #contactPage .btn:hover {
+          background-color: #e6b200;
+        }
+    
+        @media (max-width: 300px) {
+          #contactPage {
+            padding: 20px;
+          }
+    
+          #contactPage h2 {
+            font-size: 1.2rem;
+          }
+        }
+        .sidebar {
+          flex: 0 0 auto; /* Sidebar takes its default width */
+          transition: width 0.3s ease; /* Smooth transition for expanding */
+        }
+      </style>
+    
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const form = document.querySelector("#contactPage form");
+          form.addEventListener("submit", function () {
+            setTimeout(() => {
+              form.reset();
+            }, 1000);
+          });
+        });
+
+
+
+
+
+
+
+
+           
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+       
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+U
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === 'F12' || // F12 key
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || // Ctrl+Shift+I or Ctrl+Shift+J
+                (e.ctrlKey && e.key === 'U') // Ctrl+U
+            ) {
+                e.preventDefault();
+                alert("Developer tools detected! Closing the page.");
+                redirectToBlank();
+            }
+        });
+
+        // Function to redirect to blank page and prevent going back
+        function redirectToBlank() {
+            window.location.replace("about:blank"); // Replace current history entry
+        }
+
+        (function detectDevTools() {
+            let devtoolsOpen = false;
+
+            // Detect using window.outerWidth and window.outerHeight
+            function checkWindowSize() {
+                const threshold = 160; // Height difference when DevTools are open
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    devtoolsOpen = true;
+                }
+            }
+
+            // Detect using console.log behavior
+            function checkConsoleBehavior() {
+                const element = new Image();
+                Object.defineProperty(element, 'id', {
+                    get: function () {
+                        devtoolsOpen = true;
+                        // Trigger action immediately
+                        alert("Developer tools detected! Closing the page.");
+                        redirectToBlank();
+                    }
+                });
+                console.log(element);
+            }
+
+            // Monitor for Developer Tools
+            function monitorDevTools() {
+                devtoolsOpen = false;
+                checkWindowSize();
+
+                if (devtoolsOpen) {
+                    alert("Developer tools detected! Closing the page.");
+                    redirectToBlank(); // Redirect to blank page
+                } else {
+                    checkConsoleBehavior();
+                }
+            }
+
+            // Run detection every 100ms for faster response
+            setInterval(monitorDevTools, 100);
+        })();
+ 
+      </script>
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

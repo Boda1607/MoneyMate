@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="manifest" href="/manifest.json">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="/icon.png">
+  <!-- Enable standalone full-screen mode on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Set the app title when added to home screen -->
+  <meta name="apple-mobile-web-app-title" content="MyAppName">
+  <!-- Set status bar color -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+</head>
+<body>
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <button class="menu-toggle-btn" id="toggleSidebarBtn">☰</button>
+      <ul class="menu-content">
+        <li><a href="index.html" class="nav-btn" data-page="home"><span class="icon-container"><span class="material-symbols-outlined">home</span></span><span class="label">Home</span></a></li>
+        <li><a href="dashboard.html" class="nav-btn" data-page="dashboard"><span class="icon-container"><span class="material-symbols-outlined">dashboard</span></span><span class="label">Dashboard</span></a></li>
+        <li><a href="explore.html" class="nav-btn" data-page="explore"><span class="icon-container"><span class="material-symbols-outlined">explore</span></span><span class="label">Explore</span></a></li>
+        <li><a href="analytics.html" class="nav-btn" data-page="analytics"><span class="icon-container"><span class="material-symbols-outlined">analytics</span></span><span class="label">Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-btn" data-page="settings"><span class="icon-container"><span class="material-symbols-outlined">settings</span></span><span class="label">Settings</span></a></li>
+        <li><a href="account.html" class="nav-btn active" data-page="account"><span class="icon-container"><span class="material-symbols-outlined">person</span></span><span class="label">Account</span></a></li>
+        <li><a href="report.html" class="nav-btn" data-page="report"><span class="icon-container"><span class="material-symbols-outlined">report</span></span><span class="label">Report</span></a></li>
+        <li><a href="contact.html" class="nav-btn" data-page="contact"><span class="icon-container"><span class="material-symbols-outlined">mail</span></span><span class="label">Contact</span></a></li>
+        <li><a href="download.html" class="nav-btn"><span class="icon-container"><span class="material-symbols-outlined">download</span></span><span class="label">Download</span></a></li>
+      </ul>
+    </div>
+
+    <!-- Account Management Page Content -->
+<div class="content" id="accountPage">
+      <header>
+        <h1 class="page-title">Manage Your Accounts</h1>
+      </header>
+    
+      <section class="account-list">
+        <div id="total-balance">
+          <div>Total Balance</div>
+          <span id="balance-amount">$0.00</span>
+        </div>
+    
+        <h3>Your Accounts</h3>
+        <ul id="account-list">
+          <!-- Accounts will be dynamically listed here -->
+        </ul>
+      </section>
+    
+      <!-- Account Form Section -->
+      <section class="account-form">
+        <input type="text" id="account-name" placeholder="Account Name" />
+        <button id="add-account-btn">Add Account</button>
+      </section>
+    </div>
+    
+    <!-- ✅ CSS Section -->
+    <style>
+      /* Overall Page */
+      .page-title {
+        text-align: center;
+        font-size: 36px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+    
+      .account-list,
+      .account-form {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    
+      .account-list h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+    
+      /* Total Balance styling */
+      #total-balance {
+        font-size: 30px;
+        font-weight: bold;
+        color: var(--text-color);
+        text-align: center;
+        background-color: var(--circle-bg);
+        padding: 15px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+      }
+    
+      #balance-amount {
+        display: block;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 5px;
+        color: var(--text-color);
+      }
+    
+      #total-balance:hover {
+        background-color: var(--hover-bg);
+      }
+    
+      .account-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+    
+      .account-list li {
+        background-color: var(--sidebar-bg);
+        margin-bottom: 10px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s ease;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+      }
+    
+      .account-list li:hover {
+        background-color: var(--hover-bg);
+      }
+    
+      .account-info {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        flex: 1;
+      }
+    
+      .account-name {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    
+      .account-balance {
+        font-size: 18px;
+        color: var(--text-color);
+        font-weight: bold;
+      }
+    
+      .account-actions {
+        display: flex;
+        flex-direction: column; /* Stack vertically */
+        gap: 6px;                /* Space between buttons */
+        margin-top: 5px;
+        align-items: flex-end;  /* Align to the right (optional) */
+      }
+    
+      button.edit-btn,
+      button.delete-btn {
+        width: 60px;
+        padding: 6px 10px;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+      }
+    
+      button.edit-btn {
+        background-color: #4CAF50;
+        color: white;
+      }
+    
+      button.edit-btn:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+      }
+    
+      button.delete-btn {
+        background-color: #f44336;
+        color: white;
+      }
+    
+      button.delete-btn:hover {
+        background-color: #e53935;
+        transform: scale(1.05);
+      }
+    
+      .account-form {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        width: 100%;
+        max-width: 500px;
+      }
+    
+      .account-form input {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid var(--circle-bg);
+        border-radius: 10px;
+        width: 180px;
+        color: var(--text-color);
+        background-color: var(--sidebar-bg);
+      }
+    
+      .account-form button {
+        padding: 10px 20px;
+        background-color: var(--circle-bg);
+        border: none;
+        border-radius: 5px;
+        color: var(--text-color);
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+    
+      .account-form button:hover {
+        background-color: var(--hover-bg);
+      }
+    
+      #add-account-btn {
+        width: 140px;
+        text-align: center;
+      }
+
+    </style>
+
+    <!-- ✅ JavaScript Section -->
+    <script>
+      let accounts = [];
+
+      // Load accounts from localStorage on page load
+      try {
+        const storedAccounts = localStorage.getItem('accounts');
+        if (storedAccounts) {
+          accounts = JSON.parse(storedAccounts);
+        }
+      } catch (error) {
+        console.error("Error parsing accounts from localStorage:", error);
+        accounts = [];
+      }
+
+      const accountListEl = document.getElementById('account-list');
+      const accountNameInput = document.getElementById('account-name');
+      const addAccountBtn = document.getElementById('add-account-btn');
+      const balanceAmountElement = document.getElementById('balance-amount');
+      const accountSelect = document.getElementById('account'); // The dropdown for the account field
+
+      // Display accounts in a list and update balance
+      function displayAccounts() {
+        accountListEl.innerHTML = ''; // Clear existing list
+
+        if (accounts.length === 0) {
+          accountListEl.innerHTML = '<li>No accounts yet.</li>';
+          updateTotalBalance();
+          return;
+        }
+
+        accounts.forEach((account, index) => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div class="account-info">
+              <strong class="account-name">${account.name}</strong><br />
+              <span class="account-balance">Balance: $${account.balance.toFixed(2)}</span>
+            </div>
+            <div class="account-actions">
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </div>
+          `;
+
+          li.querySelector('.edit-btn').addEventListener('click', () => editAccount(index));
+          li.querySelector('.delete-btn').addEventListener('click', () => deleteAccount(index));
+
+          accountListEl.appendChild(li);
+        });
+
+        updateTotalBalance();
+        updateAccountDropdown();
+      }
+
+      function addAccount() {
+        const accountName = accountNameInput.value.trim();
+
+        if (accountName) {
+          const newAccount = {
+            name: accountName,
+            balance: 0.00
+          };
+          accounts.push(newAccount);
+          localStorage.setItem('accounts', JSON.stringify(accounts));
+          accountNameInput.value = ''; // Clear input field
+          displayAccounts();
+        } else {
+          alert('Please enter an account name');
+        }
+      }
+
+      function editAccount(index) {
+        const newAccountName = prompt('Enter new account name:', accounts[index].name);
+        const newBalance = parseFloat(prompt('Enter new balance:', accounts[index].balance));
+
+        if (newAccountName && !isNaN(newBalance)) {
+          accounts[index] = {
+            name: newAccountName,
+            balance: newBalance
+          };
+          localStorage.setItem('accounts', JSON.stringify(accounts));
+          displayAccounts();
+        } else {
+          alert('Invalid input. Please try again.');
+        }
+      }
+
+      function deleteAccount(index) {
+        if (confirm('Are you sure you want to delete this account?')) {
+          accounts.splice(index, 1); // Remove the account
+          localStorage.setItem('accounts', JSON.stringify(accounts));
+          displayAccounts();
+        }
+      }
+
+      function updateTotalBalance() {
+        const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
+        if (balanceAmountElement) {
+          balanceAmountElement.textContent = `$${totalBalance.toFixed(2)}`;
+        }
+      }
+
+      // Initialize the display when the page loads
+      addAccountBtn.addEventListener('click', addAccount);
+      displayAccounts();
+
+
+
+
+         
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+       
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+U
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === 'F12' || // F12 key
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || // Ctrl+Shift+I or Ctrl+Shift+J
+                (e.ctrlKey && e.key === 'U') // Ctrl+U
+            ) {
+                e.preventDefault();
+                alert("Developer tools detected! Closing the page.");
+                redirectToBlank();
+            }
+        });
+
+        // Function to redirect to blank page and prevent going back
+        function redirectToBlank() {
+            window.location.replace("about:blank"); // Replace current history entry
+        }
+
+        (function detectDevTools() {
+            let devtoolsOpen = false;
+
+            // Detect using window.outerWidth and window.outerHeight
+            function checkWindowSize() {
+                const threshold = 160; // Height difference when DevTools are open
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    devtoolsOpen = true;
+                }
+            }
+
+            // Detect using console.log behavior
+            function checkConsoleBehavior() {
+                const element = new Image();
+                Object.defineProperty(element, 'id', {
+                    get: function () {
+                        devtoolsOpen = true;
+                        // Trigger action immediately
+                        alert("Developer tools detected! Closing the page.");
+                        redirectToBlank();
+                    }
+                });
+                console.log(element);
+            }
+
+            // Monitor for Developer Tools
+            function monitorDevTools() {
+                devtoolsOpen = false;
+                checkWindowSize();
+
+                if (devtoolsOpen) {
+                    alert("Developer tools detected! Closing the page.");
+                    redirectToBlank(); // Redirect to blank page
+                } else {
+                    checkConsoleBehavior();
+                }
+            }
+
+            // Run detection every 100ms for faster response
+            setInterval(monitorDevTools, 100);
+        })();
+ 
+    </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

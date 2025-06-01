@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="manifest" href="/manifest.json">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="/icon.png">
+  <!-- Enable standalone full-screen mode on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Set the app title when added to home screen -->
+  <meta name="apple-mobile-web-app-title" content="MyAppName">
+  <!-- Set status bar color -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+
+</head>
+<body>
+  <div class="main-container">
+    <!-- Sidebar (Same as home page sidebar) -->
+    <div class="sidebar" id="sidebar">
+      <button class="menu-toggle-btn" id="toggleSidebarBtn">☰</button>
+      <ul class="menu-content">
+        <li><a href="index.html" class="nav-btn" data-page="home"><span class="icon-container"><span class="material-symbols-outlined">home</span></span><span class="label">Home</span></a></li>
+        <li><a href="dashboard.html" class="nav-btn" data-page="dashboard"><span class="icon-container"><span class="material-symbols-outlined">dashboard</span></span><span class="label">Dashboard</span></a></li>
+        <li><a href="explore.html" class="nav-btn" data-page="explore"><span class="icon-container"><span class="material-symbols-outlined">explore</span></span><span class="label">Explore</span></a></li>
+        <li><a href="analytics.html" class="nav-btn" data-page="analytics"><span class="icon-container"><span class="material-symbols-outlined">analytics</span></span><span class="label">Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-btn active" data-page="settings"><span class="icon-container"><span class="material-symbols-outlined">settings</span></span><span class="label">Settings</span></a></li>
+        <li><a href="account.html" class="nav-btn" data-page="account"><span class="icon-container"><span class="material-symbols-outlined">person</span></span><span class="label">Account</span></a></li>
+        <li><a href="report.html" class="nav-btn" data-page="report"><span class="icon-container"><span class="material-symbols-outlined">report</span></span><span class="label">Report</span></a></li>
+        <li><a href="contact.html" class="nav-btn" data-page="contact"><span class="icon-container"><span class="material-symbols-outlined">mail</span></span><span class="label">Contact</span></a></li>
+        <li><a href="download.html" class="nav-btn active"><span class="icon-container"><span class="material-symbols-outlined">download</span></span><span class="label">Download</span></a></li>
+      </ul>
+    </div>
+
+    <div class="content" id="downloadPage">
+      <header>
+        <h1 class="page-title">Download</h1>
+      </header>
+                <h3>Steps to Download App</h3>
+                <div class="theme-toggle" style="gap: 30px;">
+                <p>
+                    To Download the app on iOS device, open Safari, click on 
+                    <i class="fa-solid fa-arrow-up-from-bracket" style="margin: 0 4px;"></i> 
+                    and then <strong>Add to Home Screen</strong>.
+                </p>
+                </div>
+            </div>
+        </div>
+        <style>
+          h1 {
+            font-size: 36px;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            margin-top: 20px;
+            font-weight: bold;
+          }
+        </style>
+  <script src="script.js"></script>
+
+</body>
+</html>
